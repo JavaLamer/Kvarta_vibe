@@ -10,11 +10,10 @@ SessionLocal = None
 def init_db(database_url: str = None):
     global engine, SessionLocal
 
-    if database_url is None:
-        if os.environ.get("VERCEL"):
-            database_url = "sqlite:////tmp/quarta.db"
-        else:
-            database_url = "sqlite:///quarta.db"
+    if os.environ.get("VERCEL"):
+        database_url = "sqlite:////tmp/quarta.db"
+    elif database_url is None:
+        database_url = "sqlite:///quarta.db"
 
     connect_args = (
         {"check_same_thread": False}
