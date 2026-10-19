@@ -37,10 +37,28 @@ export const LeadForm: React.FC<LeadFormProps> = ({
     }
   }, [initialInterest]);
 
+  const phoneInputRef = React.useRef<HTMLInputElement>(null);
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value;
-    const formatted = formatByPhoneInput(raw);
+    const input = e.target;
+    const cursorPosition = input.selectionStart || 0;
+    const oldRaw = phone;
+    const newRaw = input.value;
+
+    // Count digits before cursor in old string
+    const oldDigitsBeforeCursor = oldRaw.slice(0, cursorPosition).replace(/\D/g, '').length;
+
+    const formatted = formatByPhoneInput(newRaw);
     setPhone(formatted);
+
+    // Move cursor to the end to ensure smooth typing experience
+    requestAnimationFrame(() => {
+      if (phoneInputRef.current) {
+        const len = formatted.length;
+        phoneInputRef.current.setSelectionRange(len, len);
+      }
+    });
+
     if (fieldErrors.phone) {
       setFieldErrors(prev => ({ ...prev, phone: '' }));
     }
@@ -265,6 +283,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 </label>
                 <input
                   id="lead-phone"
+                  ref={phoneInputRef}
                   type="tel"
                   required
                   value={phone}

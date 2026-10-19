@@ -49,31 +49,43 @@ async function startServer() {
 
   // Reverse proxy API routes to Python Flask backend
   app.all('/api/*', async (req, res) => {
-    const targetUrl = `http://127.0.0.1:${FLASK_PORT}${req.originalUrl}`;
+    const targetUrl = `http://localhost:${FLASK_PORT}${req.originalUrl}`;
     
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
     try {
-      const headers: Record<string, string> = {};
+      const headers = new Headers();
       for (const [key, val] of Object.entries(req.headers)) {
-        if (key.toLowerCase() !== 'host' && typeof val === 'string') {
-          headers[key] = val;
+        if (key.toLowerCase() !== 'host' && key.toLowerCase() !== 'connection') {
+          if (Array.isArray(val)) {
+            val.forEach(v => headers.append(key, v));
+          } else if (val) {
+            headers.append(key, val as string);
+          }
         }
       }
 
       const fetchOptions: RequestInit = {
         method: req.method,
         headers,
+        signal: controller.signal,
       };
 
-      if (['POST', 'PUT', 'PATCH'].includes(req.method) && req.body) {
-        fetchOptions.body = JSON.stringify(req.body);
-        headers['content-type'] = 'application/json';
+      if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
+        if (req.body && Object.keys(req.body).length > 0) {
+          fetchOptions.body = JSON.stringify(req.body);
+          headers.set('content-type', 'application/json');
+        } else if (req.headers['content-type']) {
+          headers.set('content-type', req.headers['content-type'] as string);
+        }
       }
 
       const flaskRes = await fetch(targetUrl, fetchOptions);
+      clearTimeout(timeout);
       
       res.status(flaskRes.status);
       flaskRes.headers.forEach((value, name) => {
-        // Forward headers except transfer-encoding / content-encoding handled by express
         if (!['content-encoding', 'transfer-encoding'].includes(name.toLowerCase())) {
           res.setHeader(name, value);
         }
@@ -82,10 +94,16 @@ async function startServer() {
       const responseData = await flaskRes.text();
       res.send(responseData);
     } catch (err: any) {
-      console.error('[Server] Proxy error to Flask backend:', err.message);
+      clearTimeout(timeout);
+      console.error('[Server] Proxy error to Flask backend:', {
+        message: err.message,
+        targetUrl,
+        method: req.method,
+        stack: err.stack,
+      });
       res.status(503).json({
         error: 'service_unavailable',
-        message: 'Сервер обработки заявок временно запускается. Пожалуйста, повторите попытку через несколько секунд.',
+        message: 'Сервер обработки заявок недоступен или возникла ошибка соединения. Пожалуйста, повторите попытку.',
       });
     }
   });
@@ -131,7 +149,8 @@ async function startServer() {
   process.on('SIGTERM', cleanup);
 }
 
+// Ensure the server starts
 startServer().catch((err) => {
-  console.error('[Server] Fatal startup error:', err);
+  console.error('[Server] Failed to start:', err);
   process.exit(1);
 });
