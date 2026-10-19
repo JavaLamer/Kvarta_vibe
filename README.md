@@ -25,62 +25,60 @@
 kvarta/
 ├── backend/
 │   ├── app/
-│   │   ├── __init__.py          # Flask app factory, CORS, error handlers
-│   │   ├── config.py            # Конфигурация из переменных окружения
-│   │   ├── extensions.py        # SQLAlchemy engine и session factory
+│   │   ├── __init__.py           # Фабрика Flask-приложения, CORS, обработчики ошибок
+│   │   ├── config.py             # Конфигурация из переменных окружения
+│   │   ├── extensions.py         # SQLAlchemy engine и session factory
 │   │   ├── models/
 │   │   │   ├── __init__.py
-│   │   │   └── lead.py          # Модели Lead и PhoneDedupLock
+│   │   │   └── lead.py           # Модели Lead и PhoneDedupLock
 │   │   ├── routes/
 │   │   │   ├── __init__.py
-│   │   │   └── leads.py         # Эндпоинты POST /api/lead и GET /api/health
+│   │   │   └── leads.py          # Эндпоинты POST /api/lead и GET /api/health
 │   │   ├── services/
 │   │   │   ├── __init__.py
-│   │   │   ├── lead_service.py  # Атомарное сохранение с дедупликацией
+│   │   │   ├── lead_service.py   # Атомарное сохранение с дедупликацией
 │   │   │   └── telegram_service.py # Уведомления в Telegram
 │   │   └── validators/
 │   │       ├── __init__.py
-│   │       └── lead_validator.py# Pydantic-схема и phonenumbers (BY)
+│   │       └── lead_validator.py # Pydantic-схема и валидатор номера (BY)
 │   ├── tests/
 │   │   ├── __init__.py
-│   │   ├── conftest.py          # Фикстуры pytest (изолированная тестовая БД)
-│   │   └── test_leads.py        # 10 автоматических тестов API
+│   │   ├── conftest.py           # Фикстуры pytest (изолированная тестовая БД)
+│   │   └── test_leads.py         # Автоматические тесты API
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   ├── .env.example
-│   └── run.py                   # Точка входа Flask-сервера
-│
+│   └── run.py                    # Точка входа Flask-сервера
 ├── src/
 │   ├── components/
-│   │   ├── Header.tsx           # Фиксированная навигация (Top Bar Contract)
-│   │   ├── Hero.tsx             # Первый экран («Обжарили в четверг...»)
-│   │   ├── About.tsx            # История Ани и Дмитрия, партии по 5 кг
-│   │   ├── ProductCatalog.tsx   # 3 зерна + дрип-пакеты + подписка
-│   │   ├── ProductModal.tsx     # Модальное окно товара с Escape/фокусом
-│   │   ├── Subscription.tsx     # Блок подписки (2 пачки/мес, 54 BYN)
-│   │   ├── HowItWorks.tsx       # График: Четверг (обжар) → Пятница (доставка)
-│   │   ├── Delivery.tsx         # Самовывоз (Короля, 9) и доставка по Минску
-│   │   ├── LeadForm.tsx         # Форма с маской +375, валидацией, 409
-│   │   ├── Footer.tsx           # Подвал, контакты, часы работы
-│   │   ├── PrivacyModal.tsx     # Документ-заготовка политики обработки данных
-│   │   └── CraftArt.tsx         # Ремесленные векторные иллюстрации
+│   │   ├── About.tsx             # История мастерской
+│   │   ├── CoffeeJourneyMap.tsx  # Карта пути зерна
+│   │   ├── CraftArt.tsx          # Векторные иллюстрации
+│   │   ├── Delivery.tsx          # Информация о доставке
+│   │   ├── Footer.tsx            # Подвал, контакты
+│   │   ├── Header.tsx            # Навигация
+│   │   ├── Hero.tsx              # Первый экран
+│   │   ├── HowItWorks.tsx        # График работы/обжарки
+│   │   ├── LeadForm.tsx          # Форма заявки
+│   │   ├── PrivacyModal.tsx      # Политика данных
+│   │   ├── ProductCatalog.tsx    # Каталог товаров
+│   │   ├── ProductModal.tsx      # Детали товара
+│   │   └── Subscription.tsx      # Блок подписки
 │   ├── data/
-│   │   └── products.ts          # Каталог сортов (Эфиопия, Колумбия, Бразилия, Дрипы)
+│   │   └── products.ts           # Каталог сортов
 │   ├── lib/
-│   │   ├── phone.ts             # Клиентская маска и валидатор номера BY
-│   │   └── utm.ts               # Сохранение UTM в sessionStorage
+│   │   ├── phone.ts              # Маска и валидатор телефона BY
+│   │   └── utm.ts                # Трекинг UTM-меток
 │   ├── types/
-│   │   └── index.ts
+│   │   └── index.ts              # TypeScript интерфейсы
 │   ├── App.tsx
 │   ├── index.css
 │   └── main.tsx
-│
-├── server.ts                    # Единый dev/prod сервер (Express + Vite proxy)
+├── server.ts                     # Прокси-сервер (Express + Vite proxy)
 ├── package.json
 ├── README.md
 ├── docker-compose.yml
-└── vercel.json
-
+└── vercel.json                   # Настройки маршрутизации для Vercel
 
 ### Результаты тестирования:
 
