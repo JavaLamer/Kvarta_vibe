@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: #261C18;
+    background-color: #FAF7F2;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: 2px solid #C35B34;
+    outline-offset: 2px;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Subtle paper texture overlay */
+.paper-texture {
+  background-color: #FAF7F2;
+  background-image: radial-gradient(#E5DDD5 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+}

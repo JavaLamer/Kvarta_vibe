@@ -1,0 +1,12 @@
+[
+  "backend/tests/test_leads.py::test_10_invalid_json_payload",
+  "backend/tests/test_leads.py::test_1_successful_lead_creation",
+  "backend/tests/test_leads.py::test_2_invalid_phone_numbers",
+  "backend/tests/test_leads.py::test_3_missing_required_fields",
+  "backend/tests/test_leads.py::test_4_duplicate_lead_within_10_minutes",
+  "backend/tests/test_leads.py::test_5_new_lead_after_window_expires",
+  "backend/tests/test_leads.py::test_6_concurrent_parallel_requests",
+  "backend/tests/test_leads.py::test_7_database_error_handling",
+  "backend/tests/test_leads.py::test_8_preserves_utm_and_referrer",
+  "backend/tests/test_leads.py::test_9_invalid_interest_type"
+]

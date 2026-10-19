@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_ENV=production
+      - PORT=5001
+      - DATABASE_URL=sqlite:////data/kvarta.db
+      - CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+    volumes:
+      - kvarta_data:/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  kvarta_data:
+    driver: local

@@ -1,0 +1,6 @@
+{
+  "name": "Кофейная мастерская «Кварта»",
+  "description": "Свежеобжаренный кофе в Минске небольшими партиями. Обжарка по четвергам, доставка по пятницам. Зёрна, дрип-пакеты и регулярная подписка.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
