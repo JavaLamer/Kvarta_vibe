@@ -11,8 +11,8 @@ class Config:
     CORS_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "*").split(",") if origin.strip()]
     
     # Telegram settings
-    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
-    TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
+    TELEGRAM_BOT_TOKEN = "8927293424:AAE59vi8SEkQVCXm3zqr3PVcKNx19l9e3Wo"
+    TELEGRAM_CHAT_ID = "695156651"
 
     # Rate limiting & deduplication window (in seconds, 10 minutes = 600)
     DEDUP_WINDOW_SECONDS = int(os.getenv("DEDUP_WINDOW_SECONDS", "600"))
