@@ -19,144 +19,7 @@
 - **Маркетинг:** Сквозное сохранение UTM-меток (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`), страницы входа и `document.referrer`.
 - **Уведомления:** Модуль отправки лидов менеджеру в Telegram Bot (с защитой от сбоев — сбой Telegram не отменяет сохранённую заявку).
 
----
-
-## 2. Структура репозитория
-
-```text
-kvarta/
-├── backend/
-│   ├── app/
-│   │   ├── __init__.py          # Flask app factory, CORS, error handlers
-│   │   ├── config.py            # Конфигурация из переменных окружения
-│   │   ├── extensions.py        # SQLAlchemy engine и session factory
-│   │   ├── models/
-│   │   │   ├── __init__.py
-│   │   │   └── lead.py          # Модели Lead и PhoneDedupLock
-│   │   ├── routes/
-│   │   │   ├── __init__.py
-│   │   │   └── leads.py         # Эндпоинты POST /api/lead и GET /api/health
-│   │   ├── services/
-│   │   │   ├── __init__.py
-│   │   │   ├── lead_service.py  # Атомарное сохранение с дедупликацией
-│   │   │   └── telegram_service.py # Уведомления в Telegram
-│   │   └── validators/
-│   │       ├── __init__.py
-│   │       └── lead_validator.py# Pydantic-схема и phonenumbers (BY)
-│   ├── tests/
-│   │   ├── __init__.py
-│   │   ├── conftest.py          # Фикстуры pytest (изолированная тестовая БД)
-│   │   └── test_leads.py        # 10 автоматических тестов API
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   ├── .env.example
-│   └── run.py                   # Точка входа Flask-сервера
-│
-├── src/
-│   ├── components/
-│   │   ├── Header.tsx           # Фиксированная навигация (Top Bar Contract)
-│   │   ├── Hero.tsx             # Первый экран («Обжарили в четверг...»)
-│   │   ├── About.tsx            # История Ани и Дмитрия, партии по 5 кг
-│   │   ├── ProductCatalog.tsx   # 3 зерна + дрип-пакеты + подписка
-│   │   ├── ProductModal.tsx     # Модальное окно товара с Escape/фокусом
-│   │   ├── Subscription.tsx     # Блок подписки (2 пачки/мес, 54 BYN)
-│   │   ├── HowItWorks.tsx       # График: Четверг (обжар) → Пятница (доставка)
-│   │   ├── Delivery.tsx         # Самовывоз (Короля, 9) и доставка по Минску
-│   │   ├── LeadForm.tsx         # Форма с маской +375, валидацией, 409
-│   │   ├── Footer.tsx           # Подвал, контакты, часы работы
-│   │   ├── PrivacyModal.tsx     # Документ-заготовка политики обработки данных
-│   │   └── CraftArt.tsx         # Ремесленные векторные иллюстрации
-│   ├── data/
-│   │   └── products.ts          # Каталог сортов (Эфиопия, Колумбия, Бразилия, Дрипы)
-│   ├── lib/
-│   │   ├── phone.ts             # Клиентская маска и валидатор номера BY
-│   │   └── utm.ts               # Сохранение UTM в sessionStorage
-│   ├── types/
-│   │   └── index.ts
-│   ├── App.tsx
-│   ├── index.css
-│   └── main.tsx
-│
-├── server.ts                    # Единый dev/prod сервер (Express + Vite proxy)
-├── package.json
-├── docker-compose.yml
-└── README.md
-```
-
----
-
-## 3. Локальный запуск
-
-### Вариант A. Быстрый запуск в едином процессе (рекомендуется)
-
-В проекте настроен `server.ts`, который автоматически запускает Flask-бэкенд на порту 5001 и проксирует запросы `/api/*`, одновременно раздавая клиент на порту 3000:
-
-```bash
-# 1. Установка зависимостей Node
-npm install
-
-# 2. Установка зависимостей Python
-pip install -r backend/requirements.txt
-
-# 3. Запуск dev-сервера
-npm run dev
-```
-
-Приложение доступно по адресу: `http://localhost:3000`.
-
----
-
-### Вариант B. Раздельный запуск (Frontend и Backend отдельно)
-
-#### 1. Запуск Backend (Flask)
-
-```bash
-cd backend
-
-# Создание виртуального окружения
-python3 -m venv .venv
-
-# Активация:
-# Linux/macOS:
-source .venv/bin/activate
-# Windows PowerShell:
-# .venv\Scripts\Activate.ps1
-
-# Установка зависимостей
-pip install -r requirements.txt
-
-# Настройка окружения
-cp .env.example .env
-
-# Запуск Flask
-python run.py
-```
-
-Backend запустится на `http://localhost:5001`.
-
-#### 2. Запуск Frontend
-
-```bash
-cd ..
-npm install
-npm run dev
-```
-
----
-
-## 4. Запуск автоматических тестов (pytest)
-
-Все 10 сценариев бизнес-логики и безопасности протестированы:
-
-```bash
-PYTHONPATH=backend python3 -m pytest backend/tests -v
-```
-
-Или через скрипт `package.json`:
-
-```bash
-npm run test:backend
-```
+                     
 
 ### Результаты тестирования:
 
@@ -175,7 +38,7 @@ npm run test:backend
 
 ---
 
-## 5. База данных и дедупликация
+## 2. База данных и дедупликация
 
 ### Схема базы данных (SQLite):
 
@@ -211,7 +74,7 @@ npm run test:backend
 
 ---
 
-## 6. Настройка Telegram-уведомлений
+## 3. Настройка Telegram-уведомлений
 
 1. Создайте бота через [@BotFather](https://t.me/BotFather) и скопируйте токен.
 2. Узнайте ваш Chat ID через [@userinfobot](https://t.me/userinfobot).
@@ -224,7 +87,7 @@ npm run test:backend
 
 ---
 
-## 7. Чек-лист перед публикацией
+## 4. Чек-лист перед публикацией
 
 Перед запуском сайта в рабочий продакшн необходимо:
 
