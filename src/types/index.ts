@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   currency: string;
   weight: string;
-  roastLevel?: 'Светлая' | 'Средняя' | 'Под эспрессо';
+  roastLevel?: 'Светлая обжарка' | 'Средняя обжарка' | 'Обжарка под эспрессо' | string;
   flavorProfile: string;
   notes: string[];
   recommendedBrew?: string[];

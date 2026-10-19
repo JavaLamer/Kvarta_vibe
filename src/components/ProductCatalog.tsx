@@ -2,6 +2,10 @@ import React from 'react';
 import { Product } from '../types';
 import { PRODUCTS } from '../data/products';
 import { ArrowUpRight } from 'lucide-react';
+import ethiopiaImg from '../assets/images/regenerated_image_1792414078239.jpg';
+import colombiaImg from '../assets/images/regenerated_image_1792414067922.jpg';
+import brazilImg from '../assets/images/regenerated_image_1792414057933.jpg';
+import dripBagsImg from '../assets/images/regenerated_image_1792414052726.jpg';
 
 interface ProductCatalogProps {
   onProductClick: (product: Product) => void;
@@ -32,23 +36,23 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             // Curated photos in unified editorial style matching each origin's roast level
             const originDetails = {
               'ethiopia-yirgacheffe': {
-                image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
+                image: ethiopiaImg,
                 badge: 'ЭФИОПИЯ · 1900М · СВЕТЛАЯ',
                 accentColor: '#C35B34',
               },
               'colombia-huila': {
-                image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=800&q=80',
+                image: colombiaImg,
                 badge: 'КОЛУМБИЯ · 1700М · СРЕДНЯЯ',
                 accentColor: '#A64823',
               },
               'brazil-cerrado': {
-                image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+                image: brazilImg,
                 badge: 'БРАЗИЛИЯ · 1100М · ЭСПРЕССО',
                 accentColor: '#4A5843',
               },
             }[product.id] || {
-              image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
-              badge: 'СПЕШЕЛТИ АРАБИКА',
+              image: ethiopiaImg,
+              badge: 'ОТБОРНАЯ АРАБИКА',
               accentColor: '#C35B34',
             };
 
@@ -138,21 +142,20 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                   <span>{dripProduct.weight}</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center py-6">
-                  {/* Photo of drip packet brewing */}
-                  <div className="sm:col-span-5 aspect-square max-w-[175px] mx-auto rounded-sm overflow-hidden bg-[#EAE2D8] border border-[#E3DAD1] shadow-2xs relative">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-stretch py-6">
+                  {/* Photo of drip packet brewing stretched to level of text */}
+                  <div className="sm:col-span-5 h-44 sm:h-full min-h-[160px] w-full rounded-sm overflow-hidden bg-[#EAE2D8] border border-[#E3DAD1] shadow-2xs relative">
                     <img
-                      src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=800&q=80"
+                      src={dripBagsImg}
                       alt="Заваривание свежего кофе в фильтр-пакете прямо в чашку"
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
-                      referrerPolicy="no-referrer"
                     />
                     <div className="absolute bottom-2 left-2 px-1.5 py-0.5 bg-[#261C18]/85 backdrop-blur-xs text-[9px] font-mono text-white rounded-xs">
                       10 ПОРЦИЙ
                     </div>
                   </div>
-                  <div className="sm:col-span-7 space-y-2.5">
+                  <div className="sm:col-span-7 flex flex-col justify-center space-y-2.5">
                     <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#261C18]">
                       {dripProduct.name}
                     </h3>

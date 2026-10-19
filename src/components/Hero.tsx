@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowDownRight } from 'lucide-react';
 import { CoffeeBeanArt } from './CraftArt';
+import heroRoasterImg from '../assets/images/regenerated_image_1792414088198.jpg';
 
 interface HeroProps {
   onSelectCoffee: () => void;
@@ -33,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({ onSelectCoffee, onSubscribe }) => {
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-[#5A4B42] leading-relaxed max-w-xl">
-              Небольшая обжарка в Минске. Свежие зёрна маленькими партиями — от нашей мастерской на Короля, 9 до вашей чашки.
+              Небольшая обжарка в Минске. Свежие зёрна маленькими партиями — от нашей мастерской до вашей чашки.
             </p>
 
             {/* Primary Action Buttons */}
@@ -83,11 +84,10 @@ export const Hero: React.FC<HeroProps> = ({ onSelectCoffee, onSubscribe }) => {
               <div className="py-4">
                 <div className="w-full aspect-[4/3] rounded-sm overflow-hidden bg-[#EAE2D8] border border-[#D8CEC4] shadow-xs relative">
                   <img
-                    src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80"
-                    alt="Свежеобжаренные зёрна спешелти кофе в барабане ростера"
+                    src={heroRoasterImg}
+                    alt="Свежеобжаренные зёрна в барабане ростера"
                     className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                     loading="eager"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 bg-[#261C18]/85 backdrop-blur-xs text-[10px] font-mono text-[#FAF7F2] rounded-xs">
                     5 КГ · СВЕЖИЙ ОБЖАР
@@ -96,17 +96,16 @@ export const Hero: React.FC<HeroProps> = ({ onSelectCoffee, onSubscribe }) => {
               </div>
 
               {/* Real craft caption */}
-              <div className="pt-4 border-t border-[#D8CEC4] flex items-center justify-between text-xs text-[#5A4B42]">
+              <div className="pt-4 border-t border-[#D8CEC4] flex items-center text-xs text-[#5A4B42]">
                 <div className="flex items-center gap-2">
                   <CoffeeBeanArt className="w-4 h-4 text-[#C35B34]" />
-                  <span className="font-medium">100% арабика спешелти</span>
+                  <span className="font-medium">100% отборная арабика</span>
                 </div>
-                <span className="font-mono text-[#6E5D53]">1–3 дня после ростера</span>
               </div>
             </div>
 
-            {/* Stamp mark */}
-            <div className="absolute -bottom-3 -right-3 hidden sm:flex items-center justify-center w-20 h-20 rounded-full border border-[#C35B34]/40 bg-[#FAF7F2] text-[#C35B34] text-[10px] font-mono uppercase text-center p-2 rotate-12 shadow-xs">
+            {/* Stamp mark (shifted leftwards) */}
+            <div className="absolute -bottom-3 right-4 sm:right-6 hidden sm:flex items-center justify-center w-20 h-20 rounded-full border border-[#C35B34]/40 bg-[#FAF7F2] text-[#C35B34] text-[10px] font-mono uppercase text-center p-2 rotate-12 shadow-xs">
               Свежий обжар
             </div>
           </div>

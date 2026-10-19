@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { X, Check, Flame, Coffee, Package } from 'lucide-react';
 import { Product } from '../types';
-import { DripPacketArt } from './CraftArt';
+import ethiopiaImg from '../assets/images/regenerated_image_1792414078239.jpg';
+import colombiaImg from '../assets/images/regenerated_image_1792414067922.jpg';
+import brazilImg from '../assets/images/regenerated_image_1792414057933.jpg';
+import dripBagsImg from '../assets/images/regenerated_image_1792414052726.jpg';
 
 interface ProductModalProps {
   product: Product | null;
@@ -92,36 +95,23 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
         {/* Modal Body */}
         <div className="py-6 space-y-6">
-          {/* Product Media: SVG for Drip Packets, Unified Photo for Whole Beans */}
-          {product.isDrip ? (
-            <div className="w-full h-44 sm:h-52 rounded-sm bg-[#FAF7F2] border border-[#E3DAD1] flex items-center justify-center p-4">
-              <div className="w-36 h-36">
-                <DripPacketArt className="w-full h-full drop-shadow-xs" />
-              </div>
-            </div>
-          ) : (
-            <div className="w-full h-44 sm:h-52 rounded-sm overflow-hidden bg-[#FAF7F2] border border-[#E3DAD1] relative shadow-2xs">
-              <img
-                src={
-                  product.id === 'ethiopia-yirgacheffe'
-                    ? 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80'
-                    : product.id === 'colombia-huila'
-                    ? 'https://images.unsplash.com/photo-1518832553480-cd0e625ed3e6?auto=format&fit=crop&w=800&q=80'
-                    : product.id === 'brazil-cerrado'
-                    ? 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80'
-                    : 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80'
-                }
-                alt={product.name}
-                className="w-full h-full object-cover object-center"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-[#261C18]/10 mix-blend-multiply pointer-events-none" />
-              <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 bg-[#FAF7F2]/95 backdrop-blur-xs border border-[#E3DAD1] text-[10px] font-mono text-[#261C18] rounded-xs">
-                {product.roastLevel} · {product.weight}
-              </div>
-            </div>
-          )}
+          {/* Product Photo */}
+          <div className="w-full h-44 sm:h-52 rounded-sm overflow-hidden bg-[#EAE2D8] border border-[#E3DAD1]">
+            <img
+              src={
+                product.id === 'ethiopia-yirgacheffe'
+                  ? ethiopiaImg
+                  : product.id === 'colombia-huila'
+                  ? colombiaImg
+                  : product.id === 'brazil-cerrado'
+                  ? brazilImg
+                  : dripBagsImg
+              }
+              alt={product.name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
 
           {/* Flavor Profile */}
           <div>
