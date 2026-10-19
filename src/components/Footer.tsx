@@ -11,17 +11,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy }) => {
     <footer className="bg-[#211713] text-[#FAF7F2] py-12 md:py-16 border-t border-[#3D2E26]">
       <div id="contacts" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20 sm:scroll-mt-22">
         
-        {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+        {/* Top Grid: all columns aligned on the exact same top horizontal level */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-white/10 items-start">
           
           {/* Brand & Mission */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-5 space-y-3">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#C35B34]">
+              Кофейная мастерская
+            </h4>
             <div className="flex items-center gap-2">
               <span className="font-serif text-2xl font-bold tracking-tight text-white">Кварта</span>
               <CoffeeBeanArt className="w-5 h-5 text-[#C35B34]" />
             </div>
             <p className="text-sm text-[#FAF7F2]/70 leading-relaxed max-w-sm">
-              Кофейная мастерская в Минске. Обжариваем спешелти зерно партиями по 5 кг каждый четверг. Доставка по пятницам.
+              Кофейная мастерская в Минске. Обжариваем отборное зерно арабики партиями по 5 кг каждый четверг. Доставка по пятницам.
             </p>
             <div className="text-xs font-mono text-[#FAF7F2]/50">
               Основана в 2019 году · Минск, Беларусь
@@ -33,14 +36,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy }) => {
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#C35B34]">
               Мастерская и самовывоз
             </h4>
-            <div className="text-sm text-[#FAF7F2]/90 space-y-2">
-              <div className="flex items-start gap-2">
+            <div className="text-sm text-[#FAF7F2]/90 space-y-3">
+              <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#C35B34] shrink-0 mt-0.5" />
                 <span>г. Минск, ул. Короля, 9</span>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2.5">
                 <Clock className="w-4 h-4 text-[#C35B34] shrink-0 mt-0.5" />
-                <div className="text-xs text-[#FAF7F2]/70 leading-normal">
+                <div className="text-xs text-[#FAF7F2]/70 leading-normal space-y-1">
                   <div>Пн–Пт: 08:00 – 20:00</div>
                   <div>Сб–Вс: 10:00 – 18:00</div>
                 </div>
@@ -53,22 +56,22 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy }) => {
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#C35B34]">
               Связь с мастерской
             </h4>
-            <div className="space-y-2.5 text-xs text-[#FAF7F2]/80">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#C35B34]" />
-                <span className="font-mono text-[#FAF7F2]/60 hover:text-white transition-colors cursor-pointer" title="Заполните перед публикацией">
+            <div className="space-y-3 text-xs text-[#FAF7F2]/80">
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-[#C35B34] shrink-0" />
+                <span className="font-mono text-[#FAF7F2]/70 hover:text-white transition-colors cursor-pointer" title="Заполните перед публикацией">
                   +375 (29) 123-45-67 <span className="text-[10px] text-[#C35B34]">(заглушка)</span>
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Send className="w-4 h-4 text-[#C35B34]" />
-                <span className="font-mono text-[#FAF7F2]/60 hover:text-white transition-colors cursor-pointer" title="Заполните перед публикацией">
+              <div className="flex items-center gap-2.5">
+                <Send className="w-4 h-4 text-[#C35B34] shrink-0" />
+                <span className="font-mono text-[#FAF7F2]/70 hover:text-white transition-colors cursor-pointer" title="Заполните перед публикацией">
                   @kvarta_coffee <span className="text-[10px] text-[#C35B34]">(заглушка)</span>
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#C35B34]" />
-                <span className="font-mono text-[#FAF7F2]/60 hover:text-white transition-colors cursor-pointer" title="Заполните перед публикацией">
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#C35B34] shrink-0" />
+                <span className="font-mono text-[#FAF7F2]/70 hover:text-white transition-colors cursor-pointer" title="Заполните перед публикацией">
                   hello@kvartacoffee.by <span className="text-[10px] text-[#C35B34]">(заглушка)</span>
                 </span>
               </div>
